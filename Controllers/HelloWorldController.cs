@@ -7,13 +7,16 @@ namespace webapi.Controllers;
 public class HelloWorldController: ControllerBase
 {
     IHelloWorldService helloWorldService;
-    public HelloWorldController(IHelloWorldService helloWorldId)
+    ILogger _logger;
+    public HelloWorldController(ILogger<HelloWorldController> logger, IHelloWorldService helloWorldId)
     {
+        _logger = logger;
         helloWorldService = helloWorldId;
     }
-
+    
     public IActionResult Get()
     {
+        _logger.LogInformation("Log de Hello World");
         return Ok(helloWorldService.GetHelloWorld());
     }
 }
